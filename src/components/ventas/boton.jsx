@@ -9,6 +9,6 @@ export default function nuevaVenta({id}){
         window.location.replace("/ventas/nuevo");
     }
     return(
-        <button href="" onClick={venta}>Nueva venta</button>
+        <button className="btn btn-outline-success  mt-3 mb-3" href="" onClick={venta}>Nueva venta</button>
     );
 }

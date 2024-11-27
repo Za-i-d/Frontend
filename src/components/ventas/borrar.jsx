@@ -9,6 +9,6 @@ export default function BorrarVentas({id}){
         window.location.replace("/ventas/mostrar");
     }    
     return(
-        <Link href="" onClick={borrar}>cancelar venta</Link>
+        <Link href="" onClick={borrar}><button className="btn btn-danger">Cancelar</button></Link>
     );
 }

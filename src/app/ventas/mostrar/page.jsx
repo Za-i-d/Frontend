@@ -3,7 +3,6 @@ import Boton from "@/components/ventas/boton";
 import BorrarVenta from "@/components/ventas/borrar";
 import EditarVenta from "@/components/ventas/editar";
 
-
 async function obtenerVentas() {
     const url = "http://localhost:3000/ventas";
     const response = await axios.get(url);
@@ -15,7 +14,6 @@ async function obtenerUsuarioPorId(id) {
     const url = `http://localhost:3000/usuarios/buscarPorId/${id}`;
     const response = await axios.get(url);
     console.log(response.data);
-    
     return response.data.nombre; // Suponiendo que el nombre está en response.data.nombre
 }
 
@@ -37,6 +35,9 @@ export default async function Ventas() {
         }))
     );
 
+    // Filtra las ventas para excluir aquellas cuyo estado es "Cancelada"
+    const ventasFiltradas = ventasConNombres.filter(venta => venta.estado !== "Cancelada");
+
     return (
         <div>
             <h1>Ventas</h1>
@@ -56,7 +57,7 @@ export default async function Ventas() {
                     </tr>
                 </thead>
                 <tbody>
-                    {ventasConNombres.map((venta, i) => (
+                    {ventasFiltradas.map((venta, i) => (
                         <tr key={i}>
                             <td>{i + 1}</td>
                             <td>{venta.nombreUsuario}</td>
@@ -66,7 +67,7 @@ export default async function Ventas() {
                             <td>{venta.fecha}</td>
                             <td>{venta.hora}</td>
                             <td>
-                                <EditarVenta idVenta={venta.id} idProd={venta.id_prod} />
+                                <EditarVenta idVenta={venta.id} idProd={venta.id_prod} idUsu = {venta.id_usu} />
                             </td>
                             <td>
                                 <BorrarVenta id={venta.id} />

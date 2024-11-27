@@ -1,7 +1,16 @@
+
 import axios from "axios";
 import Boton from "@/components/usuarios/boton";
 import BorrarUsuario from "@/components/usuarios/borrar";
 import EditarUsuario from "@/components/usuarios/editar";
+
+async function getSessionUsuario(){
+    console.log("Estas en getSession");
+    const url = "http://localhost:3000/getSessionUsuario"
+    const sessionValida = await axios.get(url);
+    console.log(sessionValida.data);
+    
+}
 
 async function usuarios(){
     const url="http://localhost:3000/usuarios";
@@ -9,6 +18,7 @@ async function usuarios(){
     return usuarios.data;
 }
 export default async function (){
+    await getSessionUsuario();
     const usuario = await usuarios();
     return(
         <div>
